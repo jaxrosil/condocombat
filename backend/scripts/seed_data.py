@@ -26,9 +26,23 @@ CONDOMINIOS: list[dict[str, Any]] = [
         "telefone": "(11) 95555-4444",
         "email": "sindico@disputaeguerra.com.br",
     },
+    {
+        "nome": "Château do Encontro de Condomínio",
+        "endereco": "Alameda dos Teimosos, 1000 — Jardim da Discórdia",
+        "cnpj": "44.555.666/0001-77",
+        "telefone": "(11) 94444-3333",
+        "email": "sindico@chateauencontro.com.br",
+    },
+    {
+        "nome": "Conjunto Residencial Quem Cala",
+        "endereco": "Rua do Silêncio Obrigatório, 1 — Bairro da Paz Forçada",
+        "cnpj": "77.888.999/0001-11",
+        "telefone": "(11) 93333-2222",
+        "email": "sindico@quemcala.org.br",
+    },
 ]
 
-# ── Apartamentos (3 condomínios × 5-6 aptos) ─────────────────────────
+# ── Apartamentos (5 condomínios × 5-7 aptos) ─────────────────────────
 
 APARTAMENTOS: list[dict[str, Any]] = [
     # Residencial Fofoca Feliz (cond_id=1)
@@ -50,6 +64,20 @@ APARTAMENTOS: list[dict[str, Any]] = [
     {"numero": "2A", "bloco": "Bloco das Disputas", "torre": None, "condominio_idx": 2},
     {"numero": "2B", "bloco": "Bloco das Disputas", "torre": None, "condominio_idx": 2},
     {"numero": "3A", "bloco": "Bloco da Trégua", "torre": None, "condominio_idx": 2},
+    {"numero": "3B", "bloco": "Bloco da Trégua", "torre": None, "condominio_idx": 2},
+    # Château do Encontro de Condomínio (cond_id=4)
+    {"numero": "1201", "bloco": "A", "torre": "Torre dos Atritos", "condominio_idx": 3},
+    {"numero": "1202", "bloco": "A", "torre": "Torre dos Atritos", "condominio_idx": 3},
+    {"numero": "1301", "bloco": "A", "torre": "Torre dos Atritos", "condominio_idx": 3},
+    {"numero": "1401", "bloco": "B", "torre": "Torre das Desavenças", "condominio_idx": 3},
+    {"numero": "1402", "bloco": "B", "torre": "Torre das Desavenças", "condominio_idx": 3},
+    {"numero": "1501", "bloco": "B", "torre": "Torre das Desavenças", "condominio_idx": 3},
+    # Conjunto Residencial Quem Cala (cond_id=5)
+    {"numero": "A1", "bloco": "Silêncio", "torre": None, "condominio_idx": 4},
+    {"numero": "A2", "bloco": "Silêncio", "torre": None, "condominio_idx": 4},
+    {"numero": "B1", "bloco": "Tolerância", "torre": None, "condominio_idx": 4},
+    {"numero": "B2", "bloco": "Tolerância", "torre": None, "condominio_idx": 4},
+    {"numero": "C1", "bloco": "Paciência", "torre": None, "condominio_idx": 4},
 ]
 
 # ── Moradores (perfis cômicos) ───────────────────────────────────────
@@ -162,6 +190,104 @@ MORADORES: list[dict[str, Any]] = [
         "tipo": "sindico",
         "apartamento_idx": 14,
     },
+    # Château do Encontro de Condomínio
+    {
+        "nome": "Doutor Metido",
+        "cpf": "121.121.121-11",
+        "email": "drmetido@chateau.com",
+        "telefone": "(11) 91212-1212",
+        "tipo": "proprietario",
+        "apartamento_idx": 16,
+    },
+    {
+        "nome": "Doguinho do Doutor",
+        "cpf": "131.131.131-11",
+        "email": "dog@chateau.com",
+        "telefone": "(11) 91313-1313",
+        "tipo": "inquilino",
+        "apartamento_idx": 16,
+    },
+    {
+        "nome": "Dona Reclamação Profissional",
+        "cpf": "141.141.141-11",
+        "email": "reclamacao@chateau.com",
+        "telefone": "(11) 91414-1414",
+        "tipo": "proprietario",
+        "apartamento_idx": 17,
+    },
+    {
+        "nome": "Influencer do Condomínio",
+        "cpf": "151.151.151-11",
+        "email": "influencer@chateau.com",
+        "telefone": "(11) 91515-1515",
+        "tipo": "inquilino",
+        "apartamento_idx": 18,
+    },
+    {
+        "nome": "Seu Discurso",
+        "cpf": "161.161.161-11",
+        "email": "discurso@chateau.com",
+        "telefone": "(11) 91616-1616",
+        "tipo": "sindico",
+        "apartamento_idx": 19,
+    },
+    {
+        "nome": "Madame do Andar de Cima",
+        "cpf": "171.171.171-11",
+        "email": "madame@chateau.com",
+        "telefone": "(11) 91717-1717",
+        "tipo": "proprietario",
+        "apartamento_idx": 20,
+    },
+    {
+        "nome": "Estudante Noturno",
+        "cpf": "181.181.181-11",
+        "email": "noturno@quemcala.com",
+        "telefone": "(11) 91818-1818",
+        "tipo": "inquilino",
+        "apartamento_idx": 21,
+    },
+    # Conjunto Quem Cala
+    {
+        "nome": "Fiscal de Portaria",
+        "cpf": "191.191.191-11",
+        "email": "fiscal@quemcala.com",
+        "telefone": "(11) 91919-1919",
+        "tipo": "proprietario",
+        "apartamento_idx": 22,
+    },
+    {
+        "nome": "Dona Calada",
+        "cpf": "202.202.202-11",
+        "email": "calada@quemcala.com",
+        "telefone": "(11) 92020-2020",
+        "tipo": "proprietario",
+        "apartamento_idx": 23,
+    },
+    {
+        "nome": "Padre da Paróquia",
+        "cpf": "212.212.212-11",
+        "email": "padre@quemcala.com",
+        "telefone": "(11) 92121-2121",
+        "tipo": "inquilino",
+        "apartamento_idx": 24,
+    },
+    {
+        "nome": "Vizinho Misterioso",
+        "cpf": "222.222.232-11",
+        "email": "misterio@quemcala.com",
+        "telefone": "(11) 92222-2323",
+        "tipo": "inquilino",
+        "apartamento_idx": 25,
+    },
+    {
+        "nome": "Aspirante a Síndico",
+        "cpf": "232.232.232-11",
+        "email": "aspirante@quemcala.com",
+        "telefone": "(11) 92323-2323",
+        "tipo": "proprietario",
+        "apartamento_idx": 26,
+    },
 ]
 
 # ── Ocorrências ──────────────────────────────────────────────────────
@@ -266,6 +392,104 @@ OCORRENCIAS: list[dict[str, Any]] = [
         "status": "aberta",
         "apartamento_idx": 12,
     },
+    # Château do Encontro de Condomínio
+    {
+        "titulo": "Barulho de obra fora do horário",
+        "descricao": "Doutor Metido contratou uma banda para ensaiar no apto 1201 às 22h. Dona Reclamação Profissional já ligou 17 vezes para o síndico.",
+        "categoria": "barulho",
+        "gravidade": "alta",
+        "status": "aberta",
+        "apartamento_idx": 16,
+    },
+    {
+        "titulo": "Influencer gravou vídeo no salão de festas",
+        "descricao": "Influencer do Condomínio usou o salão sem reserva para gravar um desafio de dança. Quebrou o lustre.",
+        "categoria": "festa",
+        "gravidade": "media",
+        "status": "investigando",
+        "apartamento_idx": 18,
+    },
+    {
+        "titulo": "Discurso na garagem às 6h",
+        "descricao": "Seu Discurso foi flagrado discursando para os carros na garagem sobre a importância de pagar o condomínio em dia. Ninguém ouviu porque os carros estavam desligados.",
+        "categoria": "outra",
+        "gravidade": "baixa",
+        "status": "arquivada",
+        "apartamento_idx": 19,
+    },
+    {
+        "titulo": "Madame perdeu a paciência com o porteiro",
+        "descricao": "Madame do Andar de Cima gritou com o porteiro porque a encomenda chegou com o papel amassado. O porteiro pediu transferência.",
+        "categoria": "briga",
+        "gravidade": "media",
+        "status": "resolvida",
+        "apartamento_idx": 20,
+    },
+    {
+        "titulo": "Estudante confundiu o andar",
+        "descricao": "Estudante Noturno tentou abrir a porta do 1301 achando que era seu apto. Acordou o Influencer, que gravou tudo.",
+        "categoria": "outra",
+        "gravidade": "baixa",
+        "status": "arquivada",
+        "apartamento_idx": 21,
+    },
+    {
+        "titulo": "Doguinho latiu a noite toda",
+        "descricao": "Doguinho do Doutor latiu das 2h às 4h da manhã. Dona Reclamação Profissional já protocolou denúncia na ouvidoria do condomínio.",
+        "categoria": "barulho",
+        "gravidade": "media",
+        "status": "aberta",
+        "apartamento_idx": 16,
+    },
+    # Conjunto Quem Cala
+    {
+        "titulo": "Fiscal de portaria multou visita",
+        "descricao": "Fiscal de Portaria abordou a visita do Padre da Paróquia e exigiu documento com foto. O visita era a mãe do Padre.",
+        "categoria": "briga",
+        "gravidade": "media",
+        "status": "investigando",
+        "apartamento_idx": 22,
+    },
+    {
+        "titulo": "Silêncio desfeito",
+        "descricao": "Dona Calada foi ouvida gritando com o vizinho por causa de som alto. Descobriram que Dona Calada não é tão calada assim.",
+        "categoria": "barulho",
+        "gravidade": "baixa",
+        "status": "aberta",
+        "apartamento_idx": 23,
+    },
+    {
+        "titulo": "Padre benzeu o elevador",
+        "descricao": "Padre da Paróquia foi flagrado benzendo o elevador depois que ele travou entre os andares. Os moradores estão divididos entre 'milagre' e 'chamar o técnico'.",
+        "categoria": "outra",
+        "gravidade": "baixa",
+        "status": "resolvida",
+        "apartamento_idx": 24,
+    },
+    {
+        "titulo": "Vizinho Misterioso nunca aparece",
+        "descricao": "Ninguém nunca viu o Vizinho Misterioso. As entregas ficam acumuladas na portaria. Moradores suspeitam que ele seja um golpe de identidade falsa.",
+        "categoria": "outra",
+        "gravidade": "media",
+        "status": "investigando",
+        "apartamento_idx": 25,
+    },
+    {
+        "titulo": "Campanha antecipada",
+        "descricao": "Aspirante a Síndico já começou a campanha para a próxima eleição. Colou cartazes em todas as áreas comuns prometendo 'fim da fofoca' — ironia.",
+        "categoria": "outra",
+        "gravidade": "baixa",
+        "status": "aberta",
+        "apartamento_idx": 26,
+    },
+    {
+        "titulo": "Vazamento no teto do B1",
+        "descricao": "O apartamento B2 está com vazamento que afetou o teto do B1. Padre da Paróquia sugeriu rezar — Fiscal de Portaria sugeriu encanador.",
+        "categoria": "outra",
+        "gravidade": "alta",
+        "status": "aberta",
+        "apartamento_idx": 24,
+    },
 ]
 
 # ── Rivalidades ───────────────────────────────────────────────────────
@@ -300,5 +524,68 @@ RIVALIDADES: list[dict[str, Any]] = [
         "apartamento_b_idx": 2,  # João Reclamação (201 B)
         "motivo": "Obra de domingo de manhã sem autorização",
         "nivel": "leve",
+    },
+    # Château do Encontro
+    {
+        "apartamento_a_idx": 16,  # Doutor Metido / Doguinho (1201 A)
+        "apartamento_b_idx": 17,  # Dona Reclamação Profissional (1202 A)
+        "motivo": "Doguinho late e Doutor Metido não faz nada. Dona Reclamação reclama de tudo.",
+        "nivel": "moderado",
+    },
+    {
+        "apartamento_a_idx": 18,  # Influencer do Condomínio (1301 A)
+        "apartamento_b_idx": 20,  # Madame do Andar de Cima (1402 B)
+        "motivo": "Influencer gravou a Madame sem permissão no salão de festas",
+        "nivel": "intenso",
+    },
+    {
+        "apartamento_a_idx": 16,  # Doutor Metido / Doguinho (1201 A)
+        "apartamento_b_idx": 21,  # Estudante Noturno (1501 B)
+        "motivo": "Doguinho late para o Estudante toda noite quando ele chega",
+        "nivel": "leve",
+    },
+    # Conjunto Quem Cala
+    {
+        "apartamento_a_idx": 22,  # Fiscal de Portaria (A1)
+        "apartamento_b_idx": 24,  # Padre da Paróquia (B1)
+        "motivo": "Fiscal barrou a mãe do Padre na portaria. Padre não perdoa.",
+        "nivel": "moderado",
+    },
+    {
+        "apartamento_a_idx": 23,  # Dona Calada (A2)
+        "apartamento_b_idx": 25,  # Vizinho Misterioso (B2)
+        "motivo": "Dona Calada acha que Vizinho Misterioso é agiota. Vizinho nunca respondeu.",
+        "nivel": "leve",
+    },
+    {
+        "apartamento_a_idx": 24,  # Padre da Paróquia (B1)
+        "apartamento_b_idx": 26,  # Aspirante a Síndico (C1)
+        "motivo": "Vazamento do teto do B1 — Aspirante prometeu resolver na campanha, Padre quer rezar missa no local.",
+        "nivel": "moderado",
+    },
+    # Cross-condomínio (brigas que atravessam fronteiras)
+    {
+        "apartamento_a_idx": 5,   # DJ Paredão (01 Norte — Barulho)
+        "apartamento_b_idx": 18,  # Influencer do Condomínio (1301 A — Château)
+        "motivo": "Disputa de quem faz mais barulho: som alto vs desafios de dança às 3h",
+        "nivel": "intenso",
+    },
+    {
+        "apartamento_a_idx": 0,   # Dona Fofoqueira (101 A — Fofoca Feliz)
+        "apartamento_b_idx": 22,  # Fiscal de Portaria (A1 — Quem Cala)
+        "motivo": "Dona Fofoqueira descobriu que Fiscal de Portaria tem um caso e espalhou pelo condomínio inteiro",
+        "nivel": "belico",
+    },
+    {
+        "apartamento_a_idx": 20,  # Madame do Andar de Cima (1402 B — Château)
+        "apartamento_b_idx": 3,   # Tia do Andar de Cima (202 B — Fofoca Feliz)
+        "motivo": "Disputa pelo título não-oficial de 'Madame mais chique do condomínio'",
+        "nivel": "leve",
+    },
+    {
+        "apartamento_a_idx": 1,   # Maria Barulho (102 A — Fofoca Feliz)
+        "apartamento_b_idx": 5,   # DJ Paredão (01 Norte — Barulho)
+        "motivo": "Qual dos dois faz mais barulho? Maria com o gato, DJ com a caixa de som. Vizinhaça já fez aposta.",
+        "nivel": "moderado",
     },
 ]

@@ -74,7 +74,7 @@ cd backend
 uv run python -m scripts.seed
 ```
 
-Cria 3 condomínios, 16 apartamentos, 13 moradores, 12 ocorrências e 5 rivalidades.
+Cria 5 condomínios, 28 apartamentos, 25 moradores, 24 ocorrências e 15 rivalidades.
 
 ## 🧪 Testes
 
