@@ -202,7 +202,7 @@ O `needs` garante a ordem: **test → build → deploy**.
 
 ---
 
-### Passo 6 — Validar Localmente Antes de Subir
+### Passo 6 (Opcional) — Validar Localmente Antes de Subir
 
 ```bash
 # 1. Testes

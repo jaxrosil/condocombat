@@ -228,7 +228,7 @@ Isso evita rodar a pipeline quando outras partes do monorepo (backend, frontend)
 
 ---
 
-### Passo 6 — Validar Localmente Antes de Subir
+### Passo 6 (Opcional) — Validar Localmente Antes de Subir
 
 ```bash
 # 1. Testes
