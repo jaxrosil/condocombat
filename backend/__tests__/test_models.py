@@ -1,9 +1,7 @@
-"""Tests for SQLAlchemy ORM models — TDD approach."""
-
 import pytest
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 
-from app.database import Base
 from app.models import (
     Apartamento,
     Condominio,
@@ -15,7 +13,6 @@ from app.models import (
 
 @pytest.mark.asyncio
 async def test_create_condominio(async_session):
-    """Deve criar um Condominio com campos obrigatórios."""
     cond = Condominio(nome="Condomínio das Flores", endereco="Rua das Flores, 123")
     async_session.add(cond)
     await async_session.commit()
@@ -28,7 +25,6 @@ async def test_create_condominio(async_session):
 
 @pytest.mark.asyncio
 async def test_create_apartamento(async_session):
-    """Deve criar um Apartamento vinculado a um Condominio."""
     cond = Condominio(nome="Edifício Central", endereco="Av. Paulista, 1000")
     async_session.add(cond)
     await async_session.flush()
@@ -46,7 +42,6 @@ async def test_create_apartamento(async_session):
 
 @pytest.mark.asyncio
 async def test_create_morador(async_session):
-    """Deve criar um Morador vinculado a um Apartamento."""
     cond = Condominio(nome="Residencial Park", endereco="Rua Verde, 500")
     async_session.add(cond)
     await async_session.flush()
@@ -68,12 +63,11 @@ async def test_create_morador(async_session):
     assert mor.id is not None
     assert mor.nome == "João Silva"
     assert mor.email == "joao@email.com"
-    assert mor.tipo == "proprietario"  # default
+    assert mor.tipo == "proprietario"
 
 
 @pytest.mark.asyncio
 async def test_create_ocorrencia(async_session):
-    """Deve criar uma Ocorrencia vinculada a um Apartamento."""
     cond = Condominio(nome="Cond Tower", endereco="Rua X, 100")
     async_session.add(cond)
     await async_session.flush()
@@ -97,12 +91,11 @@ async def test_create_ocorrencia(async_session):
     assert oco.titulo == "Festa alta madrugada"
     assert oco.categoria == "barulho"
     assert oco.gravidade == "alta"
-    assert oco.status == "aberta"  # default
+    assert oco.status == "aberta"
 
 
 @pytest.mark.asyncio
 async def test_create_rivalidade(async_session):
-    """Deve criar uma Rivalidade N:N entre dois Apartamentos."""
     cond = Condominio(nome="Cond Park", endereco="Rua Y, 200")
     async_session.add(cond)
     await async_session.flush()
@@ -130,7 +123,6 @@ async def test_create_rivalidade(async_session):
 
 @pytest.mark.asyncio
 async def test_condominio_apartamentos_relationship(async_session):
-    """Condominio.apartamentos deve retornar lista de Apartamentos."""
     cond = Condominio(nome="Cond Rel", endereco="Rua Z, 300")
     async_session.add(cond)
     await async_session.flush()
@@ -141,7 +133,9 @@ async def test_condominio_apartamentos_relationship(async_session):
     await async_session.commit()
 
     result = await async_session.execute(
-        select(Condominio).where(Condominio.id == cond.id)
+        select(Condominio)
+        .options(selectinload(Condominio.apartamentos))
+        .where(Condominio.id == cond.id)
     )
     cond_db = result.scalar_one()
     assert len(cond_db.apartamentos) == 2
@@ -150,7 +144,6 @@ async def test_condominio_apartamentos_relationship(async_session):
 
 @pytest.mark.asyncio
 async def test_apartamento_moradores_relationship(async_session):
-    """Apartamento.moradores deve retornar lista de Moradores."""
     cond = Condominio(nome="Cond Fam", endereco="Rua W, 400")
     async_session.add(cond)
     await async_session.flush()
@@ -159,13 +152,19 @@ async def test_apartamento_moradores_relationship(async_session):
     async_session.add(apt)
     await async_session.flush()
 
-    m1 = Morador(nome="Ana", cpf="111.222.333-44", email="ana@email.com", apartamento_id=apt.id)
-    m2 = Morador(nome="Beto", cpf="555.666.777-88", email="beto@email.com", apartamento_id=apt.id)
+    m1 = Morador(
+        nome="Ana", cpf="111.222.333-44", email="ana@email.com", apartamento_id=apt.id
+    )
+    m2 = Morador(
+        nome="Beto", cpf="555.666.777-88", email="beto@email.com", apartamento_id=apt.id
+    )
     async_session.add_all([m1, m2])
     await async_session.commit()
 
     result = await async_session.execute(
-        select(Apartamento).where(Apartamento.id == apt.id)
+        select(Apartamento)
+        .options(selectinload(Apartamento.moradores))
+        .where(Apartamento.id == apt.id)
     )
     apt_db = result.scalar_one()
     assert len(apt_db.moradores) == 2
@@ -174,16 +173,15 @@ async def test_apartamento_moradores_relationship(async_session):
 
 @pytest.mark.asyncio
 async def test_unique_constraint_apartamento(async_session):
-    """Não deve permitir duplicação de numero+bloco+torre+condominio_id."""
     cond = Condominio(nome="Cond Uniq", endereco="Rua V, 500")
     async_session.add(cond)
     await async_session.flush()
 
-    apt1 = Apartamento(numero="1", bloco="A", condominio_id=cond.id)
+    apt1 = Apartamento(numero="1", bloco="A", torre="T1", condominio_id=cond.id)
     async_session.add(apt1)
-    await async_session.flush()
+    await async_session.commit()
 
-    apt2 = Apartamento(numero="1", bloco="A", condominio_id=cond.id)
+    apt2 = Apartamento(numero="1", bloco="A", torre="T1", condominio_id=cond.id)
     async_session.add(apt2)
     with pytest.raises(Exception):
         await async_session.commit()
@@ -191,7 +189,6 @@ async def test_unique_constraint_apartamento(async_session):
 
 @pytest.mark.asyncio
 async def test_unique_constraint_rivalidade(async_session):
-    """Não deve permitir duplicação de par (apartamento_a, apartamento_b)."""
     cond = Condominio(nome="Cond Rival", endereco="Rua U, 600")
     async_session.add(cond)
     await async_session.flush()
@@ -203,7 +200,7 @@ async def test_unique_constraint_rivalidade(async_session):
 
     r1 = Rivalidade(apartamento_a_id=a.id, apartamento_b_id=b.id)
     async_session.add(r1)
-    await async_session.flush()
+    await async_session.commit()
 
     r2 = Rivalidade(apartamento_a_id=a.id, apartamento_b_id=b.id)
     async_session.add(r2)
