@@ -34,6 +34,9 @@ FROM node:20-alpine AS runner
 
 WORKDIR /app
 
+# Instala curl para o HEALTHCHECK
+RUN apk add --no-cache curl
+
 # Instala dependências de runtime (mínimas)
 RUN npm add next@latest
 
@@ -42,7 +45,6 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copia arquivos buildados
-COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
