@@ -1,15 +1,17 @@
-# =============================================================================
-# Pipeline do Frontend — Lint → Test → Build → Push
-# =============================================================================
 name: Frontend CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
-    paths: ['frontend/**']
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend.yml'
   pull_request:
     branches: [main]
-    paths: ['frontend/**']
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend.yml'
 
 jobs:
   lint:
