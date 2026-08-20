@@ -7,15 +7,3 @@ resource "null_resource" "netlify_deploy" {
     command = "npx --yes netlify-cli deploy --dir=${var.landing_dist_path} --site=${var.netlify_site_id} --auth=${var.netlify_auth_token} --prod"
   }
 }
-
-resource "netlify_environment_variable" "public_app_url" {
-  site_id = var.netlify_site_id
-  key     = "PUBLIC_APP_URL"
-
-  values = [
-    {
-      value   = var.public_app_url != "" ? var.public_app_url : "https://${render_web_service.frontend.url}"
-      context = "production"
-    }
-  ]
-}
