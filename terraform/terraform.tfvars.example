@@ -1,0 +1,21 @@
+# Copie para terraform.tfvars ao rodar localmente (não versionar terraform.tfvars).
+# Na pipeline de CI/CD estes valores vêm dos Secrets do GitHub, via -var.
+
+supabase_access_token   = ""
+supabase_organization_id = ""
+supabase_db_password    = ""
+supabase_project_name   = "condocombat"
+supabase_region         = "sa-east-1"
+
+render_api_key   = ""
+render_owner_id  = ""
+render_region    = "oregon"
+render_plan      = "free"
+
+dockerhub_username  = "jaxrosil"
+backend_secret_key  = ""
+cors_origins        = ""
+
+netlify_auth_token = ""
+netlify_site_name  = ""
+public_app_url     = ""

@@ -1,0 +1,59 @@
+name: Terraform CD
+
+on:
+  workflow_run:
+    workflows: ["Backend CI", "Frontend CI", "Deploy Landing Page"]
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+
+env:
+  TF_VAR_supabase_access_token: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+  TF_VAR_supabase_organization_id: ${{ secrets.SUPABASE_ORGANIZATION_ID }}
+  TF_VAR_supabase_db_password: ${{ secrets.SUPABASE_DB_PASSWORD }}
+  TF_VAR_render_api_key: ${{ secrets.RENDER_API_KEY }}
+  TF_VAR_render_owner_id: ${{ secrets.RENDER_OWNER_ID }}
+  TF_VAR_dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+  TF_VAR_backend_secret_key: ${{ secrets.BACKEND_SECRET_KEY }}
+  TF_VAR_netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  TF_VAR_netlify_site_name: ${{ secrets.NETLIFY_SITE_NAME }}
+
+jobs:
+  terraform:
+    name: Terraform Init, Plan & Apply
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.ref }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build Landing Page
+        working-directory: ./landing
+        run: |
+          npm ci
+          npm run build
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "latest"
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./terraform
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: terraform apply -auto-approve tfplan
