@@ -36,5 +36,5 @@ provider "render" {
 
 provider "netlify" {
   token = var.netlify_auth_token
-  team_id = var.netlify_team_id
+  default_team_id = var.netlify_team_id
 }
