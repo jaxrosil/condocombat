@@ -1,5 +1,5 @@
 data "netlify_site" "landing" {
-  name = var.netlify_site_name
+  id = var.netlify_site_id
 }
 
 resource "null_resource" "netlify_deploy" {
