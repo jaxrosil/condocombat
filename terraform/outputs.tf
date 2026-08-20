@@ -19,7 +19,7 @@ output "frontend_url" {
   value       = "https://${render_web_service.frontend.url}"
 }
 
-output "landing_url" {
-  description = "URL pública da Landing Page na Netlify"
-  value       = data.netlify_site.landing.custom_domain != null && data.netlify_site.landing.custom_domain != "" ? "https://${data.netlify_site.landing.custom_domain}" : "https://${data.netlify_site.landing.name}.netlify.app"
+output "landing_site_id" {
+  description = "ID do site na Netlify"
+  value       = var.netlify_site_id
 }
