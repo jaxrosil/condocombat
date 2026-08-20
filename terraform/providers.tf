@@ -1,22 +1,22 @@
-# =============================================================================
-# CondoCombat — Terraform Providers (Desafio 3)
-# =============================================================================
-
 terraform {
   required_version = ">= 1.10.0"
 
   required_providers {
     supabase = {
       source  = "supabase/supabase"
-      version = "~> 1.5"
+      version = "~> 1.10"
     }
     render = {
       source  = "render-oss/render"
-      version = "~> 1.7"
+      version = "~> 1.9"
     }
     netlify = {
       source  = "netlify/netlify"
-      version = "~> 0.2"
+      version = "~> 0.4"
+    }
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 3.2"
     }
   }
 
@@ -35,6 +35,6 @@ provider "render" {
 }
 
 provider "netlify" {
-  token = var.netlify_auth_token
+  token           = var.netlify_auth_token
   default_team_id = var.netlify_team_id
 }
