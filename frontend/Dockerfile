@@ -1,5 +1,5 @@
 # =============================================================================
-# Stage 1: Dependencies — instala node_modules
+# Stage 1: Dependencies
 # =============================================================================
 FROM node:20-alpine AS deps
 
@@ -9,20 +9,23 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 # =============================================================================
-# Stage 2: Builder — compila a aplicação
+# Stage 2: Builder
 # =============================================================================
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_TELEMETRY_DISABLED=1
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # =============================================================================
-# Stage 3: Runner — imagem de produção
+# Stage 3: Runner
 # =============================================================================
 FROM node:20-alpine AS runner
 
