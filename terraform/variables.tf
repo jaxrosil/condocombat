@@ -112,6 +112,11 @@ variable "netlify_site_id" {
   default     = ""
 }
 
+variable "netlify_team_id" {
+  description = "Team ID in Netlify"
+  type        = string
+}
+
 variable "landing_dist_path" {
   description = "Caminho relativo para a pasta dos estáticos compilados da Landing Page"
   type        = string
