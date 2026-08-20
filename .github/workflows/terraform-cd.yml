@@ -18,6 +18,7 @@ env:
   TF_VAR_netlify_auth_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
   TF_VAR_netlify_site_name: ${{ secrets.NETLIFY_SITE_NAME }}
   TF_VAR_netlify_site_id: ${{ secrets.NETLIFY_SITE_ID }}
+  TF_VAR_netlify_team_id: ${{ secrets.NETLIFY_TEAM_ID }}
 
 jobs:
   terraform:
